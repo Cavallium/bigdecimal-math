@@ -5,8 +5,8 @@ import java.math.BigInteger;
 import java.math.MathContext;
 import java.util.Vector;
 
+import it.cavallium.warppi.bigdecimalmath.MathSettings;
 import it.cavallium.warppi.util.Error;
-import it.cavallium.warppi.util.Utils;
 
 /**
  * A BigSurdVec represents an algebraic sum or differences of values which each
@@ -549,12 +549,12 @@ public class BigSurdVec implements Comparable<BigSurdVec> {
 	 * @since 2012-02-15
 	 */
 	public BigInteger toBigInteger() {
-		BigDecimal tmp = BigDecimal.ZERO.setScale(Utils.scale, Utils.scaleMode);
+		BigDecimal tmp = BigDecimal.ZERO.setScale(MathSettings.scale, MathSettings.scaleMode);
 		if (isBigInteger() == false) {
 			throw new ArithmeticException("Undefined conversion " + toString() + " to Rational.");
 		}
 		for (final BigSurd s : terms) {
-			tmp = BigDecimalMath.addRound(tmp, s.pref.BigDecimalValue(new MathContext(Utils.scale, Utils.scaleMode2)));
+			tmp = BigDecimalMath.addRound(tmp, s.pref.BigDecimalValue(new MathContext(MathSettings.scale, MathSettings.scaleMode2)));
 		}
 		return tmp.toBigInteger();
 	} /* BigSurd.toRational */
@@ -565,9 +565,9 @@ public class BigSurdVec implements Comparable<BigSurdVec> {
 	 * @since 2012-02-15
 	 */
 	public BigDecimal toBigDecimal() {
-		BigDecimal tmp = BigDecimal.ZERO.setScale(Utils.scale, Utils.scaleMode);
+		BigDecimal tmp = BigDecimal.ZERO.setScale(MathSettings.scale, MathSettings.scaleMode);
 		for (final BigSurd s : terms) {
-			tmp = BigDecimalMath.addRound(tmp, s.BigDecimalValue(new MathContext(Utils.scale, Utils.scaleMode2)));
+			tmp = BigDecimalMath.addRound(tmp, s.BigDecimalValue(new MathContext(MathSettings.scale, MathSettings.scaleMode2)));
 		}
 		return tmp;
 	} /* BigSurd.toBigDecimal */
@@ -617,7 +617,7 @@ public class BigSurdVec implements Comparable<BigSurdVec> {
 					s += "+";
 				}
 				if (bs.isBigInteger()) {
-					s += bs.BigDecimalValue(new MathContext(Utils.scale, Utils.scaleMode2)).toBigInteger().toString();
+					s += bs.BigDecimalValue(new MathContext(MathSettings.scale, MathSettings.scaleMode2)).toBigInteger().toString();
 				} else if (bs.isRational()) {
 					s += bs.toRational().toString();
 				} else {

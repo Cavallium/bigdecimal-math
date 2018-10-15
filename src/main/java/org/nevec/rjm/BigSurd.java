@@ -5,8 +5,8 @@ import java.math.BigInteger;
 import java.math.MathContext;
 import java.security.ProviderException;
 
+import it.cavallium.warppi.bigdecimalmath.MathSettings;
 import it.cavallium.warppi.util.Error;
-import it.cavallium.warppi.util.Utils;
 
 /**
  * Square roots on the real line.
@@ -232,7 +232,7 @@ public class BigSurd implements Cloneable, Comparable<BigSurd> {
 			s += "(";
 		}
 		if (bs.isBigInteger()) {
-			s += bs.BigDecimalValue(new MathContext(Utils.scale, Utils.scaleMode2)).toBigInteger().toString();
+			s += bs.BigDecimalValue(new MathContext(MathSettings.scale, MathSettings.scaleMode2)).toBigInteger().toString();
 		} else if (bs.isRational()) {
 			s += bs.toRational().toString();
 		} else {

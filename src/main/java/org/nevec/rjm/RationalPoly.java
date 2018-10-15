@@ -48,7 +48,9 @@ public class RationalPoly
         public RationalPoly(RatPoly num)
         {
                 a = num ;
-                b = RatPoly.ONE ;
+                Vector<Rational> rat = new Vector<Rational>();
+                rat.add(new Rational(1));
+                b = new RatPoly(rat) ;
         } /* ctor */
 
         /** Subtract a constant.
